@@ -2,16 +2,19 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PhraseSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        //
+        DB::table('phrases')->insert([
+            ['category' => 'Movies', 'phrase' => 'The Godfather'],
+            ['category' => 'Sports', 'phrase' => 'Michael Jordan'],
+            ['category' => 'Music', 'phrase' => 'The Beatles'],
+            ['category' => 'Food', 'phrase' => 'Chocolate Cake'],
+            ['category' => 'Technology', 'phrase' => 'Artificial Intelligence'],
+        ]);
     }
 }
