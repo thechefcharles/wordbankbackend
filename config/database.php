@@ -1,4 +1,22 @@
 <?php
+// At the top of your file
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Config;
+
+if (env('JAWSDB_URL')) {
+    $url = parse_url(env('JAWSDB_URL'));
+    $host = $url['host'];
+    $username = $url['user'];
+    $password = $url['pass'];
+    $database = substr($url['path'], 1);
+    $port = $url['port'];
+
+    Config::set('database.connections.mysql.host', $host);
+    Config::set('database.connections.mysql.port', $port);
+    Config::set('database.connections.mysql.database', $database);
+    Config::set('database.connections.mysql.username', $username);
+    Config::set('database.connections.mysql.password', $password);
+}
 
 use Illuminate\Support\Str;
 
@@ -42,14 +60,26 @@ return [
             'synchronous' => null,
         ],
 
+// Inside config/database.php
+
 'mysql' => [
-    'driver'    => 'mysql',
-    'url'       => env('JAWSDB_URL'),
-    'charset'   => 'utf8mb4',
+    'driver' => 'mysql',
+    'url' => env('JAWSDB_URL'),
+    'host' => env('DB_HOST', '127.0.0.1'),
+    'port' => env('DB_PORT', '3306'),
+    'database' => env('DB_DATABASE', 'forge'),
+    'username' => env('DB_USERNAME', 'forge'),
+    'password' => env('DB_PASSWORD', ''),
+    'unix_socket' => env('DB_SOCKET', ''),
+    'charset' => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
-    'prefix'    => '',
-    'strict'    => true,
-    'engine'    => null,
+    'prefix' => '',
+    'prefix_indexes' => true,
+    'strict' => true,
+    'engine' => null,
+    'options' => extension_loaded('pdo_mysql') ? array_filter([
+        PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+    ]) : [],
 ],
 
         'mariadb' => [
