@@ -1,4 +1,4 @@
-// File: database/seeders/DatabaseSeeder.php
+<?php
 
 namespace Database\Seeders;
 
@@ -13,7 +13,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // You can call other seeders here, e.g.,
-        // $this->call(PhraseSeeder::class);
+        // Call other seeders here
+        $this->call([
+            UserSeeder::class,
+            PostSeeder::class,
+            // any other seeders you have
+        ]);
     }
 }
