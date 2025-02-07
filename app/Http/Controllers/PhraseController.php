@@ -1,5 +1,3 @@
-<?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -15,6 +13,10 @@ class PhraseController extends Controller
             return response()->json(['error' => 'No phrases found'], 404);
         }
 
-        return response()->json($phrase);
+        // Ensuring a consistent response structure
+        return response()->json([
+            'phrase' => $phrase->phrase,  // Assuming 'phrase' is a column in your 'phrases' table
+            'category' => $phrase->category  // Assuming 'category' is also a column
+        ]);
     }
 }
