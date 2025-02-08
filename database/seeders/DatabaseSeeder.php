@@ -13,11 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // Call other seeders here
+        // Call the PhraseSeeder to populate the phrases table.
         $this->call([
-            UserSeeder::class,
-            PostSeeder::class,
-            // any other seeders you have
+            PhraseSeeder::class,
         ]);
     }
 }
